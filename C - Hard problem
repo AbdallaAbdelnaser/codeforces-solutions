@@ -1,0 +1,41 @@
+Let,
+
+f(i,R)=  be the Minimum cost for the first  i  strings with last string reversed.
+
+f(i,U)=  Minimum cost for the first  i  strings with last string un-reversed.
+
+If there was only one string,
+
+Then,  f(1,R)=C1  and  f(1,U)=0 
+
+Let us establish a relationship in between the answer for the first  i  strings with the answer for the first  (i−1)  strings.
+
+Let us examine the case when the string  Si  is reversed, and is put at the end of the list of the first  (i−1)  strings.
+
+If the last string was reversed, and  R(Si−1)<=R(Si) 
+
+Then  f(i,R)=f(i−1,R)+Ci 
+
+The cost to reach  f(i−1,R)  and the cost of reversing  Si 
+
+If the last string was not reversed and  Si−1<=R(Si) 
+
+Then  f(i,R)=f(i−1,R) 
+
+Since, there is no additional cost after reaching  f(i−1,R) 
+
+We set  f(i,R)  to the minimum of these two conditions.
+
+Similarly, we can establish the recurrence for  f(i−1,U) 
+
+if(s[i] >= s[i - 1]) f(i, U) = f(i - 1, U) 
+if(s[i] >= R(s[i - 1]) f(i, U) = min{f(i, U), f(i - 1, R)} 
+if(R(s[i]) >= s[i - 1]) f(i, R) = c[i] + f(i - 1, U) 
+if(R(s[i]) >= R(s[i - 1])) f(i, R) = min{f(i, R), c[i] + f(i - 1, R)} 
+The answer is  min(f(N,R),f(N,U)) 
+
+P. S. - In my code, I have ensured that if there’s a point at which the list cannot be sorted and any of the  4  combinations  (Si−1,Si),(R(Si−1),Si),(R(Si−1),R(Si)),(Si−1,R(Si))  do not lead to non-decreasing lexicographic order,
+
+Then  f(i,R)=f(i,U)=∞ 
+
+This propagates till  f(N,R)=f(N,U)=∞
